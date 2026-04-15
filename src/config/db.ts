@@ -15,7 +15,7 @@ export const connectDB = async () => {
   });
   try {
     const client = await pool.connect();
-    log('Database connection established successfully.');
+    log('Database connection established successfully');
     log('Connected to database:', pool.options.database);
     client.release();
   } catch (error) {

@@ -1,12 +1,14 @@
 import debug from 'debug';
-import { env } from './config/env.ts';
-import { connectDB } from './config/db.ts';
+import { env } from '../config/env.ts';
+import type { Genre } from '../entities/genres.ts';
 import type { Pool } from 'pg';
 
+const log = debug(`${env.PROJECT_NAME}:repo.genres`);
+log('Starting genres repository...');
 
-// CRUD:
+// CRUD
 
-export cons readAllGenres = async (pool: Pool) => {
+export const readAllGenres = async (pool: Pool) => {
     const { rows } = await pool.query<Genre>('SELECT genre_id AS id, name FROM genres');
     return rows;
 }
