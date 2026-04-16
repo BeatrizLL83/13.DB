@@ -2,7 +2,7 @@
 -- CREATE DATABASE movies_db;
 -- \c movies_db
 
--- Tabla de películas estándar
+-- Tabla de películas
 CREATE TABLE movies (
   movie_id SERIAL PRIMARY KEY,
   title VARCHAR(255) NOT NULL,
@@ -28,14 +28,11 @@ CREATE TABLE movies_genres (
   PRIMARY KEY (movie_id, genre_id)
 );
 
--- Hacemos transacción:
 BEGIN;
-
 
 INSERT INTO genres (name) VALUES
   ('Action'), ('Comedy'), ('Drama'), ('Horror'), ('Crime'), ('Sci-Fi'),
   ('Adventure'), ('Fantasy'), ('Animation'), ('Thriller'), ('Romance'), ('History');
-
 
 INSERT INTO movies (title, release_year, director, duration, rate, poster) VALUES
   ('The Shawshank Redemption', 1994, 'Frank Darabont', 142, 9.3, 'https://www.imdb.com/title/tt0111161/'),

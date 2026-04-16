@@ -7,6 +7,7 @@ title: SQL
     - [SQL (1974)](#sql-1974)
     - [Componentes de SQL](#componentes-de-sql)
     - [Estandarización](#estandarización)
+    - [Aprendizaje del Lenguaje SQL](#aprendizaje-del-lenguaje-sql)
     - [Sistemas de gestión de bases de datos relacionales (R-DBMS)](#sistemas-de-gestión-de-bases-de-datos-relacionales-r-dbms)
   - [Base de datos No Relacionales o NoSQL](#base-de-datos-no-relacionales-o-nosql)
     - [Historia de las Bases de Datos NoSQL](#historia-de-las-bases-de-datos-nosql)
@@ -35,20 +36,28 @@ title: SQL
     - [El principal objetivo de MySQL es velocidad y robustez](#el-principal-objetivo-de-mysql-es-velocidad-y-robustez)
     - [Escalabilidad y límites](#escalabilidad-y-límites)
     - [Conectividad](#conectividad)
-    - [Aprendizaje del Lenguaje SQL](#aprendizaje-del-lenguaje-sql)
-  - [Instalación](#instalación)
   - [Tipos de tablas en MySQL](#tipos-de-tablas-en-mysql)
     - [Motor MyISAM](#motor-myisam)
     - [Motor InnoDB](#motor-innodb)
     - [Motor HEAP](#motor-heap)
     - [Motor NDB](#motor-ndb)
-  - [Tipos de datos](#tipos-de-datos)
+  - [Instalación](#instalación)
+- [PostgreSQL](#postgresql)
+  - [¿Qué es PostgreSQL?](#qué-es-postgresql)
+  - [Características de PostgreSQL](#características-de-postgresql)
+    - [Robustez y estándares](#robustez-y-estándares)
+    - [Escalabilidad y límites](#escalabilidad-y-límites-1)
+    - [Conectividad](#conectividad-1)
+    - [Seguridad](#seguridad)
+  - [Tipos de almacenamiento en PostgreSQL](#tipos-de-almacenamiento-en-postgresql)
+  - [Instalación](#instalación-1)
+  - [Tipos de datos en PostgreSQL](#tipos-de-datos-en-postgresql)
 - [Lenguaje SQL: Definición de datos (DDL)](#lenguaje-sql-definición-de-datos-ddl)
   - [Conexión](#conexión)
-  - [Información de las DB en el servidor](#información-de-las-db-en-el-servidor)
-  - [Creación de una DB](#creación-de-una-db)
-  - [Uso de una DB](#uso-de-una-db)
-  - [Descripción de una tabla](#descripción-de-una-tabla)
+  - [Información de las DB en el servidor (PostgreSQL)](#información-de-las-db-en-el-servidor-postgresql)
+  - [Creación de una base de datos](#creación-de-una-base-de-datos)
+  - [Uso de una base de datos](#uso-de-una-base-de-datos)
+  - [Descripción de una tabla (PostgreSQL)](#descripción-de-una-tabla-postgresql)
   - [Creación de tablas](#creación-de-tablas)
     - [Clave primaria o Primary Key](#clave-primaria-o-primary-key)
     - [Restricciones a los campos](#restricciones-a-los-campos)
@@ -66,21 +75,21 @@ title: SQL
     - [Expresiones de comparación](#expresiones-de-comparación)
   - [Funciones nativas del lenguaje](#funciones-nativas-del-lenguaje)
     - [Funciones de agregación](#funciones-de-agregación)
-    - [Funciones de cadena](#funciones-de-cadena)
-    - [Funciones numéricas](#funciones-numéricas)
-    - [Funciones de fecha y hora](#funciones-de-fecha-y-hora)
+    - [Funciones de cadena (PostgreSQL)](#funciones-de-cadena-postgresql)
+    - [Funciones numéricas (PostgreSQL)](#funciones-numéricas-postgresql)
+    - [Funciones de fecha y hora (PostgreSQL)](#funciones-de-fecha-y-hora-postgresql)
     - [Otras funciones](#otras-funciones)
-      - [Funciones de control de flujo](#funciones-de-control-de-flujo)
-      - [Funciones de conversión](#funciones-de-conversión)
-      - [Funciones de sistema](#funciones-de-sistema)
-      - [Funciones de cifrado](#funciones-de-cifrado)
+      - [Funciones de control de flujo (PostgreSQL)](#funciones-de-control-de-flujo-postgresql)
+      - [Funciones de conversión (PostgreSQL)](#funciones-de-conversión-postgresql)
+      - [Funciones de sistema (PostgreSQL)](#funciones-de-sistema-postgresql)
+      - [Funciones de cifrado (PostgreSQL)](#funciones-de-cifrado-postgresql)
   - [INSERT (Create)](#insert-create)
   - [UPDATE (Update)](#update-update)
   - [DELETE (Delete)](#delete-delete)
 - [Advanced SQL](#advanced-sql)
   - [Subqueries](#subqueries)
   - [Índices](#índices)
-    - [Índices FULLTEXT](#índices-fulltext)
+    - [Búsqueda de texto completo (Full-text search) en PostgreSQL](#búsqueda-de-texto-completo-full-text-search-en-postgresql)
   - [Views](#views)
   - [Bloqueos y transactions](#bloqueos-y-transactions)
     - [Bloqueos en Bases de Datos SQL](#bloqueos-en-bases-de-datos-sql)
@@ -88,25 +97,20 @@ title: SQL
       - [Tipos de Bloqueos](#tipos-de-bloqueos)
       - [Niveles de Bloqueo](#niveles-de-bloqueo)
       - [Consideraciones Adicionales](#consideraciones-adicionales)
-    - [Transactions en MySQL](#transactions-en-mysql)
+    - [Transacciones en PostgreSQL](#transacciones-en-postgresql)
       - [Propiedades ACID de las Transacciones](#propiedades-acid-de-las-transacciones)
-      - [Gestión de Transacciones en MySQL](#gestión-de-transacciones-en-mysql)
+      - [Gestión de Transacciones en PostgreSQL](#gestión-de-transacciones-en-postgresql)
       - [Niveles de Aislamiento](#niveles-de-aislamiento)
       - [Ejemplo de Transacción](#ejemplo-de-transacción)
-  - [Procedimientos almacenados (Stored Procedures) y funciones (Functions) en MySQL](#procedimientos-almacenados-stored-procedures-y-funciones-functions-en-mysql)
-    - [Procedimientos Almacenados](#procedimientos-almacenados)
-      - [Características de los Procedimientos Almacenados](#características-de-los-procedimientos-almacenados)
-      - [Sintaxis Básica](#sintaxis-básica)
-      - [Ejemplo de Procedimiento Almacenado](#ejemplo-de-procedimiento-almacenado)
-    - [Funciones](#funciones)
-      - [Características de las Funciones](#características-de-las-funciones)
-      - [Sintaxis Básica de las funciones](#sintaxis-básica-de-las-funciones)
-      - [Ejemplo de Función](#ejemplo-de-función)
-    - [Diferencias entre Procedimientos Almacenados y Funciones](#diferencias-entre-procedimientos-almacenados-y-funciones)
-    - [Ventajas y Desventajas](#ventajas-y-desventajas)
-      - [Ventajas](#ventajas)
-      - [Desventajas](#desventajas)
-  - [Triggers](#triggers)
+  - [Procedimientos almacenados (Stored Procedures) y funciones (Functions) en PostgreSQL](#procedimientos-almacenados-stored-procedures-y-funciones-functions-en-postgresql)
+    - [Procedimientos almacenados (Procedures)](#procedimientos-almacenados-procedures)
+    - [Funciones (Functions)](#funciones-functions)
+    - [Diferencias clave respecto a MySQL](#diferencias-clave-respecto-a-mysql)
+    - [Ventajas y desventajas](#ventajas-y-desventajas)
+  - [Triggers (Disparadores) en PostgreSQL](#triggers-disparadores-en-postgresql)
+    - [Sintaxis básica](#sintaxis-básica)
+    - [Ejemplo: actualizar número de likes](#ejemplo-actualizar-número-de-likes)
+    - [Diferencias clave en los triggers respecto a MySQL](#diferencias-clave-en-los-triggers-respecto-a-mysql)
 
 ## Introducción
 
@@ -137,16 +141,21 @@ Si representamos una tabla como una rejilla, al estilo de las hojas de cálculo
 
 #### SQL (1974)
 
+El lenguaje SQL (Structured Query Language, Lenguaje de Consulta Estructurado) es un lenguaje de programación utilizado para gestionar y manipular bases de datos relacionales. SQL es un lenguaje declarativo, lo que significa que los usuarios especifican qué resultados desean obtener, en lugar de cómo obtenerlos.
+
 - **lenguaje específico de dominio**, a veces se describe como un **lenguaje declarativo**
 - diseñado para administrar, y recuperar información de **sistemas de gestión de bases de datos relacionales** (R-DBMS)
 - manejo del **álgebra y el cálculo relacional** en base al **modelo relacional** de **Edgar Frank Codd** (1970)
-- realizar todo tipo de operaciones con los datos
+
+#### Componentes de SQL
+
+- SQL permite realizar todo tipo de operaciones con los datos
   - efectuar consultas con el fin de recuperar, de forma sencilla, información de bases de datos
   - realizar cambios en ellas, incluyendo la inserción de datos, actualizaciones y borrado
   - la creación y modificación de esquemas
   - el control de acceso a los datos
 
-#### Componentes de SQL
+Esto da lugar a tres bloques de instrucciones:
 
 - lenguaje de definición de datos (**DDL**): CREATE, DROP, ALTER ...
 - lenguaje de manipulación de datos (**DML**): SELECT, INSERT, UPDATE, DELETE ...
@@ -154,8 +163,15 @@ Si representamos una tabla como una rejilla, al estilo de las hojas de cálculo
 
 #### Estandarización
 
+SQL es un estándar internacional, y la mayoría de los sistemas de gestión de bases de datos relacionales (RDBMS) lo implementan con algunas variaciones y extensiones específicas de cada sistema, por lo que se habla de **dialectos SQL**.
+
 - Instituto Nacional Estadounidense de Estándares (ANSI) en 1986
 - Organización Internacional de Normalización (ISO) en 1987
+
+#### Aprendizaje del Lenguaje SQL
+
+- [sqlBolt](https://sqlbolt.com/)
+- [aprende sql](https://www.aprendesql.dev)
 
 #### Sistemas de gestión de bases de datos relacionales (R-DBMS)
 
@@ -258,17 +274,14 @@ En resumen, las bases de datos NoSQL ofrecen una alternativa poderosa y flexible
 #### Tipos de atributos
 
 - **Atributos compuestos** vs. **Atributos simples** (atómicos)
-
   - Los atributos compuestos se pueden dividir en componentes más pequeños con significado propio
   - e.g. dirección = calle + municipio + CP + provincia
 
 - Atributos mono-valuados vs. **Atributos multi-valuados**
-
   - Un atributo mono-valuado tiene un único valor para una entidad particular
   - e.g. el atributo hijos, será multi-valuado en numerosas entidades “persona”
 
 - Atributos almacenados vs. **Atributos derivados**
-
   - en la base de dato almacenamos los atributos de partida (atributo almacenado), no los resultados que se derivan a partir de ellos (atributo derivado)
   - e.g. la edad de una persona [atributo derivado] se puede calcular (derivar) de su fecha de nacimiento [atributo almacenado]
 
@@ -296,7 +309,6 @@ En la practica, es habitual generar un atributo para que actúe como clave prima
 **Cardinalidad**: Numero de elementos de un tipo que se conectan con un elemento de otro (restricción que se observa en el dominio del problema y que controla las ocurrencias de las relaciones).
 
 - En el caso de las relaciones binarias (grado 2):
-
   - Relaciones uno a uno (1:1) La clave aparece una sola vez en cada una de las tablas relacionadas
   - Relaciones uno a muchos (1:n) La clave de una tabla aparece n veces en la tabla relacionada.
     - Es el tipo de relación más común
@@ -479,7 +491,6 @@ Los diagramas ER constan de varios elementos clave:
 1. **Entidades**: Representan objetos o conceptos del mundo real que tienen una existencia independiente y sobre los cuales se desea almacenar información. Por ejemplo, en un sistema de gestión de una biblioteca, las entidades podrían ser "Libro", "Autor", "Usuario", etc. Se representan con un rectángulo con el nombre de la entidad en su interior.
 
 2. **Atributos**: Son las propiedades o características de una entidad. Por ejemplo, una entidad "Libro" podría tener atributos como "Título", "ISBN", "Año de publicación", etc. Los atributos pueden ser de diferentes tipos:
-
    - **Atributos simples**: No pueden dividirse en componentes más pequeños. Se representan con un óvalo unido a la entidad por una línea.
    - **Atributos compuestos**: Pueden dividirse en componentes más pequeños. Se representan con un óvalo unido al atributo agrupador por una línea.
    - **Atributos derivados**: Se calculan a partir de otros atributos. Se representan con un óvalo punteado unido a la entidad o al atributo del que se derivan por una línea.
@@ -490,7 +501,6 @@ Los diagramas ER constan de varios elementos clave:
 4. **Cardinalidad**: Indica el número de instancias de una entidad que pueden estar asociadas con instancias de otra entidad. Por ejemplo, en una relación "Escribe" entre "Autor" y "Libro", la cardinalidad podría ser "uno a muchos" si un autor puede escribir muchos libros, pero cada libro es escrito por un solo autor. Se representa con un número o un rango de números en los extremos de la línea de relación.
 
 5. **Tipos de relaciones**: La inclusión de las relaciones junto con su cardinalidad permite representar los tres tipos de relaciones ya mencionados:
-
    - **Uno a uno (1:1)**: Una instancia de una entidad se relaciona con una instancia de otra entidad.
    - **Uno a muchos (1:N)**: Una instancia de una entidad se relaciona con muchas instancias de otra entidad.
    - **Muchos a muchos (M:N)**: Muchas instancias de una entidad se relacionan con muchas instancias de otra entidad.
@@ -598,31 +608,6 @@ Seguridad
 - Sistema de contraseñas y privilegios muy flexible y segura (se encriptan cuando se conectan a un servidor).
 - Todas la palabras de paso viajan encriptadas en la red
 
-#### Aprendizaje del Lenguaje SQL
-
-[sqlBolt](https://sqlbolt.com/)
-
-### Instalación
-
-[mysql/downloads/](https://www.mysql.com/downloads/)
-
-- al final de la página [MySQL Community (GPL) Downloads](https://dev.mysql.com/downloads/)
-
-  - [MySQL Community Server](https://dev.mysql.com/downloads/mysql/)
-  - [MySQL Shell](https://dev.mysql.com/downloads/shell/)
-  - [MySQL Workbench](https://dev.mysql.com/downloads/workbench/)
-
-- en todos ellos, al final de la página
-
-  - _No thanks, just start my download_
-
-- en el server, incluir
-  - documentation
-  - samples y examples
-  - puerto: 3306 (default)
-  - cuenta root: password
-  - añadir otra cuenta: All Hosts / Role: User Admin
-
 ### Tipos de tablas en MySQL
 
 MySQL incorpora "motores de almacenamiento", que nos permite seleccionar el tipo de almacenamiento interno de cada tabla
@@ -685,54 +670,142 @@ SELECT * FROM nombre_tabla_disco;
 - Los datos se guardan en memoria, pero los logs van a disco.
 - Es una buena elección cuando disponiendo de varios servidores necesitamos a la vez velocidad, transacciones y redundancia de datos; replicación síncrona; y resistencia a caídas de servidores
 
-### Tipos de datos
+### Instalación
 
-- **numéricos**: INT, BIGINT, DECIMAL, FLOAT, DOUBLE
-- **cadena de caracteres**: CHAR, VARCHAR, TEXT
-- **fecha y hora**: DATE, TIME, DATETIME, TIMESTAMP
-- **binarios**: BINARY, VARBINARY, BLOB
-- **otros**: ENUM, SET, JSON
+[mysql/downloads/](https://www.mysql.com/downloads/)
 
-La diferencia entre CHAR y VARCHAR es que CHAR almacena cadenas de longitud fija, mientras que VARCHAR almacena cadenas de longitud variable. Ademas el tamaño máximo de CHAR es de 255 caracteres, mientras que el de VARCHAR es de 65.535 caracteres. Además CHAR puede usarse sin indicar la longitud, en cuyo caso se asume 1.
+- al final de la página [MySQL Community (GPL) Downloads](https://dev.mysql.com/downloads/)
+  - [MySQL Community Server](https://dev.mysql.com/downloads/mysql/)
+  - [MySQL Shell](https://dev.mysql.com/downloads/shell/)
+  - [MySQL Workbench](https://dev.mysql.com/downloads/workbench/)
 
-- **CHAR** (n?): 0-255 caracteres
-- **VARCHAR** (N): 0-65.535 caracteres
-- **TEXT**: 0-65.535 caracteres = VARCHAR(65.535)
-  - TYNYTEXT: 0-255 caracteres = CHAR(255)
-  - MEDIUMTEXT: 0-16.777.215 caracteres = VARCHAR(16.777.215)
-  - LONGTEXT: 0-4.294.967.295 caracteres = VARCHAR(4.294.967.295)
+- en todos ellos, al final de la página
+  - _No thanks, just start my download_
 
-En cuanto a los datos binarios, los tipos de datos BINARY y VARBINARY se utilizan para almacenar datos binarios, mientras que el tipo de datos BLOB se utiliza para almacenar datos binarios de gran tamaño.
+- en el server, incluir
+  - documentation
+  - samples y examples
+  - puerto: 3306 (default)
+  - cuenta root: password
+  - añadir otra cuenta: All Hosts / Role: User Admin
 
-- **BINARY**: 0-255 bytes
-- **VARBINARY**: 0-65.535 bytes
-- **BLOB**: 0-65.535 bytes = VARBINARY(65.535)
-  - TYNYBLOB: 0-255 bytes = BINARY(255)
-  - MEDIUMBLOB: 0-16.777.215 bytes = VARBINARY(16.777.215)
-  - LONGBLOB: 0-4.294.967.295 bytes = VARBINARY(4.294.967.295)
+## PostgreSQL
 
-La diferencia entre los distintos tipos numéricos es la cantidad de bytes que se utilizan para almacenar el número y el rango de valores que se pueden almacenar.
+### ¿Qué es PostgreSQL?
 
-Para los números enteros, las posibilidades son
+PostgreSQL es un sistema de gestión de bases de datos relacional de código abierto, desarrollado y mantenido por la comunidad global de PostgreSQL Global Development Group desde 1989. Está licenciado bajo la Licencia BSD, lo que permite su uso, modificación y distribución libremente.
 
-- **INT** (n?): 4 bytes, rango de -2.147.483.648 a 2.147.483.647 -> enteros hasta 10 dígitos
-  - **BIGINT** (n?): 8 bytes, rango de -9.223.372.036.854.775.808 a 9.223.372.036.854.775.807 -> enteros hasta 19 dígitos
-  - TYNYINT (n?) 1 byte, rango de -128 a 127 -> enteros hasta 3 dígitos [**BOOL**, **BOOLEAN** son alias de TINYINT(1)]
-  - SMALLINT (n?): 2 bytes, rango de -32.768 a 32.767 -> enteros hasta 5 dígitos
-  - MEDIUMINT (n?): 3 bytes, rango de -8.388.608 a 8.388.607 -> enteros hasta 7 dígitos
+- Escrito principalmente en C.
+- Considerado uno de los sistemas de bases de datos más avanzados y robustos del mundo open source.
+- Soporta los principales sistemas operativos: Linux, Windows, macOS, FreeBSD, Solaris, etc.
+- Muy utilizado en aplicaciones empresariales, web, científicas y de análisis de datos.
 
-Para los números decimales, las posibilidades son
+### Características de PostgreSQL
 
-- **FLOAT** (M,D): 4 bytes, 7 dígitos de precisión
-- **DOUBLE** (M,D): 8 bytes, 15 dígitos de precisión
-- **DECIMAL** (M,D): 65 dígitos, 30 decimales (decimales desempaquetados, en lugar de como coma flotante)
+#### Robustez y estándares
 
-Los ENUM y SET son tipos de datos que permiten almacenar una lista de valores. La diferencia entre ellos es que ENUM solo puede almacenar un valor de la lista, mientras que SET puede almacenar varios valores.
+- Cumple con el estándar SQL (actualmente SQL:2016) y soporta muchas extensiones propias.
+- Soporta transacciones ACID completas, integridad referencial, vistas, procedimientos almacenados, triggers, y tipos de datos avanzados.
+- Permite extensiones y personalización mediante funciones escritas en varios lenguajes (PL/pgSQL, PL/Python, PL/Perl, etc.).
 
-- **ENUM**: 1 valor de una lista
-- **SET**: varios valores de una lista. Se almacenan como un número binario
+#### Escalabilidad y límites
 
-Los datos JSON son un tipo de datos que permite almacenar datos en formato JSON. Este tipo de datos es muy útil para almacenar datos no estructurados. Aparecieron en MySQL 5.7.8, acercando MySQL a las bases de datos NoSQL.
+- Maneja grandes volúmenes de datos y concurrencia de usuarios.
+- Soporta índices avanzados: B-tree, Hash, GiST, SP-GiST, GIN, BRIN.
+- Permite hasta 32 TB por tabla y bases de datos de tamaño prácticamente ilimitado (limitado por el sistema de archivos).
+- No tiene un límite estricto en el número de índices por tabla ni en el número de columnas (hasta 1600 columnas por tabla).
+- Permite replicación nativa (streaming replication), particionamiento de tablas y alta disponibilidad.
+
+#### Conectividad
+
+- Acceso mediante TCP/IP, sockets Unix y conexiones seguras SSL/TLS.
+- APIs y drivers para numerosos lenguajes: C, C++, Java (JDBC), Python (psycopg2), Node.js, PHP, Ruby, Go, etc.
+- Soporta autenticación por contraseña, certificados, Kerberos, LDAP, y otros métodos.
+
+#### Seguridad
+
+- Sistema de roles y privilegios muy granular.
+- Soporta cifrado de conexiones y de datos en reposo (a través de herramientas externas o extensiones).
+- Permite políticas de control de acceso a nivel de fila (Row Level Security).
+
+### Tipos de almacenamiento en PostgreSQL
+
+PostgreSQL utiliza un único motor de almacenamiento integrado, que soporta todas las características avanzadas (transacciones, bloqueos a nivel de fila, MVCC, etc.). No existen motores alternativos como en MySQL, pero se pueden crear tablas no permanentes:
+
+- **Tablas permanentes**: por defecto, almacenadas en disco.
+- **Tablas temporales**: válidas solo durante la sesión.
+- **Tablas UNLOGGED**: no registran cambios en el WAL (Write-Ahead Log), por lo que son más rápidas pero menos seguras ante fallos.
+
+### Instalación
+
+La instalación de PostgreSQL puede realizarse desde el sitio oficial [https://www.postgresql.org/download/](https://www.postgresql.org/download/) o mediante gestores de paquetes del sistema operativo (apt, yum, brew, chocolatey, etc.).
+
+Herramientas incluidas:
+
+- **psql**: cliente de línea de comandos.
+- **pgAdmin**: interfaz gráfica para administración.
+- **pg_dump/pg_restore**: utilidades para backup y restauración.
+- **initdb**: inicialización de clústeres de bases de datos.
+
+El puerto por defecto es el **5432**.
+
+Durante la instalación se crea el usuario "postgres" (superusuario por defecto).
+
+### Tipos de datos en PostgreSQL
+
+- **Numéricos**:
+  - `SMALLINT` (2 bytes): -32.768 a 32.767
+  - `INTEGER` o `INT` (4 bytes): -2.147.483.648 a 2.147.483.647
+  - `BIGINT` (8 bytes): -9.223.372.036.854.775.808 a 9.223.372.036.854.775.807
+  - `SERIAL`, `BIGSERIAL`: enteros autoincrementales
+  - `REAL` (4 bytes, 6 dígitos de precisión)
+  - `DOUBLE PRECISION` (8 bytes, 15 dígitos de precisión)
+  - `NUMERIC(p,s)` o `DECIMAL(p,s)`: precisión arbitraria
+
+- **Cadenas de caracteres**:
+  - `CHAR(n)`: longitud fija
+  - `VARCHAR(n)`: longitud variable
+  - `TEXT`: longitud ilimitada (hasta 1 GB)
+
+- **Fecha y hora**:
+  - `DATE`, `TIME`, `TIMESTAMP`, `TIMESTAMPTZ`, `INTERVAL`
+
+- **Binarios**:
+  - `BYTEA`: datos binarios de cualquier tamaño
+
+- **Booleanos**:
+  - `BOOLEAN`: valores `TRUE` o `FALSE`
+
+- **UUID**:
+  - `UUID`: identificador único universal
+
+- **JSON**:
+  - `JSON`, `JSONB`: almacenamiento y consulta de datos en formato JSON
+
+- **ARRAY**:
+  - `ARRAY`: permite almacenar listas de valores del mismo tipo
+
+- **ENUM**:
+  - Se pueden definir tipos enumerados personalizados:
+
+```sql
+CREATE TYPE mood AS ENUM ('happy', 'sad', 'neutral');
+CREATE TABLE persona (
+  estado_animo mood
+);
+-- Alternativamente, usar CHECK:
+CREATE TABLE persona (
+  estado_animo VARCHAR(10) CHECK (estado_animo IN ('happy', 'sad', 'neutral'))
+);
+```
+
+**Notas:**
+
+- Para textos largos, usa `TEXT`.
+- Para datos binarios, usa `BYTEA`.
+- Para autoincremento, usa `SERIAL` o `BIGSERIAL`.
+- Para valores restringidos, usa tipos ENUM personalizados o restricciones `CHECK`.
+- Para datos semiestructurados, usa `JSON` o `JSONB`.
 
 ## Lenguaje SQL: Definición de datos (DDL)
 
@@ -789,127 +862,137 @@ serán los que proporcionemos desde un programa JS que quiera hacer una conexió
 
 Normalmente, los valores se tomarán de .env y podrán variar en función del entorno
 
-### Información de las DB en el servidor
+### Información de las DB en el servidor (PostgreSQL)
 
-Una vez dentro del shell de MySQL, todos los comandos terminan en **punto y coma**
-El shell no es sensible al uso de mayúsculas y minúsculas
+Una vez dentro del shell de PostgreSQL (`psql`), los comandos pueden terminar en **punto y coma** pero no lo hacen los comandos internos (metacomandos), comienzan por barra invertida (`\`).
+El shell no es sensible al uso de mayúsculas y minúsculas.
 
-Para comprobar las DB que existen, podemos user la sentencia **SHOW DATABASES**
-
-```shell
-show databases;
-```
-
-La respuesta nos muestra las DB existentes, incluyendo sakila y world si hemos instalado '_samples and examples_'
+Para comprobar las bases de datos que existen, podemos usar el metacomando **\l** o **\list**:
 
 ```shell
-+--------------------+
-| Database           |
-+--------------------+
-| information_schema |
-| mysql              |
-| performance_schema |
-| sakila             |
-| sys                |
-| world              |
-+--------------------+
-6 rows in set (0.00 sec)
+\l
 ```
 
-En el **MSShell** la conexión sería
-
-```shell SQL
-  \c localhost -u alce65;
-  ◀┙
-  Please provide the password for 'alce65@localhost':
-  ◀┙
-```
-
-Una vez conectados, los comandos SQL comienzan por \sql
-
-```shell SQL
-  \sql show databases
-```
-
-### Creación de una DB
-
-Una vez que has confirmado que no existe ninguna base de datos con el nombre elegido, podemos crear una base de datos con dicho nombre utilizando **CREATE DATABASE**
+La respuesta nos muestra las bases de datos existentes, por ejemplo:
 
 ```shell
-  create database sample;
-  ◀┙
-  Query OK, 1 row affected (0.08 sec)
+                                  List of databases
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges
+-----------+----------+----------+-------------+-------------+-----------------------
+ postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
+ template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+ template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+ world     | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
 ```
 
-Creará una base de datos vacía y no contendrá ninguna tabla
-
-### Uso de una DB
-
-Para utilizar una base de datos, primero es necesario seleccionarla y “abrirla”, es decir establecer comunicación con ella, empleando el comando **USE**
+Para conectarse a una base de datos específica desde el shell de PostgreSQL:
 
 ```shell
-  USE sample;
-  ◀┙
-  Database changed
+\c nombre_basedatos
 ```
 
-Para comprobar en cualquier momento cual es la actual base de datos a la que estamos conectados se puede usar el siguiente comando **SELECT DATABASE()**:
+Por ejemplo:
 
 ```shell
-  select database();
-  ◀┙
-  +------------+
-  | database() |
-  +------------+
-  | sample     |
-  +------------+
-  1 row in set (0.00 sec)
+\c world
 ```
 
-Igualmente podemos seleccionar alguna de las DB ya existentes con contenido
-En este caso podemos obtener más información con  **SHOW TABLES**
+### Creación de una base de datos
+
+Para crear una base de datos nueva, utiliza el comando **CREATE DATABASE**:
 
 ```shell
-  use world
-  ◀┙
-  Database changed
-  SHOW TABLES;
-  ◀┙
-  +------------------+
-  | Tables_in_world  |
-  +------------------+
-  | city             |
-  | country          |
-  | country_language |
-  +------------------+
-  3 rows in set (0.01 sec)
+CREATE DATABASE sample;
 ```
 
-### Descripción de una tabla
+Esto creará una base de datos vacía y no contendrá ninguna tabla.
 
-Una vez seleccionada una DB en la que vemos que existe una tabla, podemos consultar en cualquier momento su estructura mediante el comando **DESCRIBE** (abreviado como **DESC**)
+### Uso de una base de datos
+
+Para conectarte a una base de datos (si no lo hiciste al iniciar `psql`):
 
 ```shell
- DESC city;
-+-------------+----------+------+-----+---------+----------------+
-| Field       | Type     | Null | Key | Default | Extra          |
-+-------------+----------+------+-----+---------+----------------+
-| ID          | int      | NO   | PRI | NULL    | auto_increment |
-| Name        | char(35) | NO   |     |         |                |
-| CountryCode | char(3)  | NO   | MUL |         |                |
-| District    | char(20) | NO   |     |         |                |
-| Population  | int      | NO   |     | 0       |                |
-+-------------+----------+------+-----+---------+----------------+
-5 rows in set (0.01 sec)
+\c sample
 ```
 
-La descripción ya nos indica alguna de las **propiedades** importantes que definiremos para cade **campo**
+Para comprobar en cualquier momento a qué base de datos estás conectado, puedes usar:
 
-- type
-- null / no null -> si admite valores null
-- default -> si tiene un valor por defecto
-- key pri -> si es clave primaria y se se completa de forma auto incremental
-- foreign key (mul) > si es clave foránea
+```shell
+SELECT current_database();
+```
+
+El resultado será similar a:
+
+```shell
+ current_database
+------------------
+ sample
+(1 row)
+```
+
+Para listar las tablas existentes en la base de datos actual, usa el metacomando **\dt**:
+
+```shell
+\dt
+```
+
+Por ejemplo, si estás en la base de datos `world`:
+
+```shell
+\c world
+\dt
+```
+
+El resultado será algo como:
+
+```shell
+             List of tables
+ Schema |    Name    | Type  |  Owner
+--------+------------+-------+----------
+ public | cities     | table | postgres
+ public | countries  | table | postgres
+ public | regions    | table | postgres
+ public | states     | table | postgres
+ public | subregions | table | postgres
+```
+
+### Descripción de una tabla (PostgreSQL)
+
+Una vez conectados a la base de datos y sabiendo que existe una tabla, podemos consultar su estructura mediante el metacomando **\d nombre_tabla** en `psql`.
+
+```shell
+\d regions;
+```
+
+El resultado será similar a:
+
+```shell
+                                        Table "public.regions"
+    Column    |            Type             | Collation | Nullable |             Default
+--------------+-----------------------------+-----------+----------+----------------------------------
+ id           | bigint                      |           | not null | generated by default as identity
+ name         | character varying(100)      |           | not null |
+ translations | text                        |           |          |
+ created_at   | timestamp without time zone |           |          |
+ updated_at   | timestamp without time zone |           | not null | CURRENT_TIMESTAMP
+ flag         | smallint                    |           | not null | 1
+ wikiDataId   | character varying(255)      |           |          |
+Indexes:
+    "regions_pkey" PRIMARY KEY, btree (id)
+Referenced by:
+    TABLE "countries" CONSTRAINT "countries_region_id_fkey" FOREIGN KEY (region_id) REFERENCES regions(id)
+    TABLE "subregions" CONSTRAINT "subregions_region_id_fkey" FOREIGN KEY (region_id) REFERENCES regions(id)
+```
+
+La descripción nos indica algunas de las **propiedades** importantes de cada campo:
+
+- type (tipo de dato)
+- not null / null (si admite valores nulos)
+- default (valor por defecto)
+- Indexes
+  - PRIMARY KEY (si es clave primaria y si es autoincremental)
+- References / ReferencedBy
+  - Foreign-key constraints (si es clave foránea)
 
 ### Creación de tablas
 
@@ -952,100 +1035,118 @@ CREATE TABLE tableName
   PRIMARY KEY (field_name_1, field_name_2,…)
 );
 
-CREATE TABLE tableName
-(
-  field_name1 dataType(size) INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE tableName (
+  field_name1 SERIAL PRIMARY KEY,
+  field_name2 dataType(size) [NULL | NOT NULL]
+);
+
+-- Alternativamente, con la sintaxis moderna:
+CREATE TABLE tableName (
+  field_name1 INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   field_name2 dataType(size) [NULL | NOT NULL]
 );
 ```
 
-Los formatos de las claves primarias pueden ser
+Los formatos de las claves primarias pueden ser:
 
-- `INT UNSIGNED AUTO_INCREMENT PRIMARY KEY`
-- `BINARY(16) DEFAULT (UUID_TO_BIN(UUID()))`
-- `VARCHAR(36) DEFAULT (UUID())`
+- `SERIAL PRIMARY KEY` o `INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY` (autoincremental)
+- `UUID PRIMARY KEY DEFAULT gen_random_uuid()` (UUID en formato texto estándar)
 
-En los dos últimos casos, se está creando un campo que almacena un UUID (Universal Unique Identifier) en formato binario o en formato texto
+En PostgreSQL, para usar UUID como clave primaria, se recomienda el tipo de dato `UUID` y establecer el valor por defecto con la función `gen_random_uuid()`. Es necesario tener instalada la extensión `pgcrypto` para usar esta función:
+
+```sql
+CREATE EXTENSION IF NOT EXISTS "pgcrypto";
+
+CREATE TABLE ejemplo_uuid (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  ...
+);
+```
+
+Esto crea un campo que almacena un UUID (Identificador Único Universal) en formato texto estándar (36 caracteres, incluyendo guiones).
 
 #### Restricciones a los campos
 
-Entre las restricciones que podemos añadir a un campo,
+Entre las restricciones que podemos añadir a un campo en PostgreSQL:
 
 - `NOT NULL` para que el campo no pueda quedar vacío
 - `UNIQUE` para que el campo no pueda tener valores repetidos
 - `DEFAULT` para que el campo tenga un valor por defecto
-- `AUTO_INCREMENT` para que el campo se incremente automáticamente
-- `ZERO_FILL` para que el campo se rellene con ceros a la izquierda
+- `CHECK` para establecer condiciones que deben cumplirse
+
+En PostgreSQL, el incremento automático se consigue con `SERIAL` o `GENERATED ALWAYS AS IDENTITY` (no existe `AUTO_INCREMENT`). Tampoco existe `ZERO_FILL` como restricción.
 
 <!-- -------------------------------- -->
 
-Por ejemplo, tablas users
-id, user_alias, email, first_name, surname, phone, created_at, modified_at
-
-<!-- -------------------------------- -->
+Ejemplo de tabla `users` en PostgreSQL:
 
 ```sql
-  CREATE TABLE users (
-    user_id INT AUTO_INCREMENT,
-    user_alias VARCHAR(50) NOT NULL UNIQUE,
-    email VARCHAR(50) NOT NULL UNIQUE,
-    first_name VARCHAR(100) NOT NULL,
-    surname VARCHAR(100),
-    phone CHAR(12) UNIQUE,
-    created_at TIMESTAMP NOT NULL DEFAULT (NOW()),
-    updated_at TIMESTAMP NOT NULL DEFAULT (NOW())
-    PRIMARY KEY (user_id)
-    );
+CREATE TABLE users (
+  user_id SERIAL PRIMARY KEY,
+  user_alias VARCHAR(50) NOT NULL UNIQUE,
+  email VARCHAR(50) NOT NULL UNIQUE,
+  first_name VARCHAR(100) NOT NULL,
+  surname VARCHAR(100),
+  phone CHAR(12) UNIQUE,
+  created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMP NOT NULL DEFAULT NOW()
+);
 ```
 
-Alternativamente, para el user_Id
+Alternativamente, para usar UUID como clave primaria:
 
 ```sql
-  user_id BINARY(16) DEFAULT (UUID_TO_BIN(UUID()))
+CREATE EXTENSION IF NOT EXISTS "pgcrypto";
+
+CREATE TABLE users (
+  user_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_alias VARCHAR(50) NOT NULL UNIQUE,
+  email VARCHAR(50) NOT NULL UNIQUE,
+  first_name VARCHAR(100) NOT NULL,
+  surname VARCHAR(100),
+  phone CHAR(12) UNIQUE,
+  created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMP NOT NULL DEFAULT NOW()
+);
 ```
 
 #### Foreign Key
 
-Relación 1:N con tabla de notas:
+Relación 1:N con tabla de notas (PostgreSQL):
 
-id, title, is_important, content, autor, created_at
+id, title, is_important, content, author_id, created_at
 
 ```sql
-  CREATE TABLE notes (
-    note_id BINARY(16) DEFAULT (UUID_TO_BIN(UUID()))
-    title VARCHAR(255) NOT NULL,
-    is_important BOOLEAN DEFAULT FALSE,
-    content TEXT,
-    author_id BINARY(16) NOT NULL,
-    created_at TIMESTAMP NOT NULL DEFAULT (NOW())
-    PRIMARY KEY (id)
-    FOREIGN KEY (author) REFERENCES users(id)
-  )
+CREATE TABLE notes (
+  note_id SERIAL PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  is_important BOOLEAN DEFAULT FALSE,
+  content TEXT,
+  author_id UUID NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+  FOREIGN KEY (author_id) REFERENCES users(user_id)
+);
 ```
 
-En otro ejemplo vemos una relación N:N, de una tabla consigo misma
+En otro ejemplo vemos una relación N:N, de una tabla consigo misma (PostgreSQL):
 
-<!-- -------------------------------- -->
+Por ejemplo, una tabla refleja las relaciones de unos usuarios con otros, como amigos o enemigos
 
-Por ejemplo, una tabla releja las relaciones de unos usuarios con otros, como amigos o enemigos
-
-- first_user_id
-- second_user_id
+- source_user_id
+- target_user_id
 - relation_type
 
-<!-- -------------------------------- -->
-
 ```sql
-  CREATE TABLE user_others (
-    source_user_id BINARY(16) NOT NULL,
-    target_user_id BINARY(16) NOT NULL,
-    relation_type ENUM('friend', 'enemy'),
-    created_at TIMESTAMP NOT NULL DEFAULT (NOW()),
-	  updated_at TIMESTAMP NOT NULL DEFAULT (NOW()),
-    PRIMARY KEY (source_user_id, target_user_id),
-    FOREIGN KEY(source_user_id) REFERENCES users(user_id),
-    FOREIGN KEY(target_user_id) REFERENCES users(user_id)
-  );
+CREATE TABLE user_others (
+  source_user_id UUID NOT NULL,
+  target_user_id UUID NOT NULL,
+  relation_type VARCHAR(10) NOT NULL CHECK (relation_type IN ('friend', 'enemy')),
+  created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
+  PRIMARY KEY (source_user_id, target_user_id),
+  FOREIGN KEY (source_user_id) REFERENCES users(user_id),
+  FOREIGN KEY (target_user_id) REFERENCES users(user_id)
+);
 ```
 
 #### Restricciones posteriores
@@ -1095,39 +1196,44 @@ Un ejemplo más habitual, con relación n:m entre dos tablas, movies y genres, c
 
 ```sql
 
-CREATE TABLE movies {
-  id BINARY(16) PRIMARY KEY DEFAULT (UUID_TO_BIN(UUID()))
-  title  VARCHAR(250) NOT NULL,
+
+-- Ejemplo equivalente en PostgreSQL:
+
+CREATE TABLE movies (
+  movie_id SERIAL PRIMARY KEY,
+  title VARCHAR(250) NOT NULL,
   year INT NOT NULL,
   director VARCHAR(250) NOT NULL,
   duration INT NOT NULL,
-  poster TEXT
+  poster TEXT,
   rate DECIMAL(3,1) NOT NULL
-}
+);
 
-CREATE TABLE genres {
-  id INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE genres (
+  genre_id SERIAL PRIMARY KEY,
   name VARCHAR(255) NOT NULL UNIQUE
-}
+);
 
-create TABLE movies_generes {
-  movie_id BINARY(16)
-  genere_id INT
-  FOREIGN KEY(movie_id) REFERENCES movies(id)
-  FOREIGN KEY
-  PRIMARY KEY (movie_id, genere_id )
-}
+CREATE TABLE movies_genres (
+  movie_id INT NOT NULL,
+  genre_id INT NOT NULL,
+  PRIMARY KEY (movie_id, genre_id),
+  FOREIGN KEY (movie_id) REFERENCES movies(movie_id),
+  FOREIGN KEY (genre_id) REFERENCES genres(genre_id)
+);
 ```
 
 Para la tabla de la relación, hay una alternativa para escribirlo de forma más compacta
 
 ```sql
 
-create TABLE movie_genere {
-  movie_id BINARY(16) REFERENCES movies(id)
-  genere_id INT REFERENCES genres(id)
-  PRIMARY KEY (movie_id, genere_id )
-}
+
+-- Alternativa compacta en PostgreSQL:
+CREATE TABLE movies_genres (
+  movie_id INT REFERENCES movies(movie_id),
+  genre_id INT REFERENCES genres(genre_id),
+  PRIMARY KEY (movie_id, genre_id)
+);
 ```
 
 ### Borrado de las tablas
@@ -1160,85 +1266,49 @@ La creación de índices aporta velocidad a las búsquedas,
 sacrificando espacio en disco y rapidez a la hora de realizar modificaciones.
 
 ```sql
-CREATE ...
-  INDEX index_name ON table_name
-    (column1, column2, ..., columnN)
+-- Sintaxis en PostgreSQL para crear un índice:
+CREATE INDEX index_name ON table_name (column1, column2, ...);
+
+-- Para un índice único:
+CREATE UNIQUE INDEX index_name ON table_name (column1);
 ```
 
-Por ejemplo
+Por ejemplo, para crear la tabla y los índices:
 
 ```sql
 CREATE TABLE material (
   id INT NOT NULL,
   name CHAR(50) NOT NULL,
   resistance INT,
-  melting_pt FLOAT,
-  INDEX index_id_name (id, name),
-  UNIQUE INDEX index_name (name))
+  melting_pt FLOAT
+);
+
+CREATE INDEX index_id_name ON material (id, name);
+CREATE UNIQUE INDEX index_name ON material (name);
 ```
 
 ### Cambios en tablas ya creadas
 
-ALTER TABLE es usado para cambiar la estructura de una tabla existente. Podemos añadir o borrar columnas, cambiar el tipo de las columnas existentes, o renombrar las columnas o la tabla misma. También podemos cambiar el comentario de la tabla y el tipo de tabla.
+ALTER TABLE es usado para cambiar la estructura de una tabla existente en PostgreSQL. Podemos añadir o borrar columnas, cambiar el tipo de las columnas existentes, o renombrar las columnas o la tabla misma.
 
 ```sql
- ALTER TABLE tbl_name specification [, specification
+-- Añadir una columna
+ALTER TABLE tbl_name ADD COLUMN field_name_n INT;
+
+-- Borrar una columna
+ALTER TABLE tbl_name DROP COLUMN field_name_n;
+
+-- Renombrar una columna
+ALTER TABLE tbl_name RENAME COLUMN field_name_n TO field_name_new;
+
+-- Cambiar el tipo de una columna
+ALTER TABLE tbl_name ALTER COLUMN field_name_n TYPE VARCHAR(40);
+
+-- Renombrar una tabla
+ALTER TABLE tbl_name RENAME TO tbl_name_new;
 ```
 
-Las especificaciones corresponden a las distintas operaciones que se pueden llevar a cabo
-
-- Rename -> Renombra el nombre de una Tabla
-- Add -> Añade una columna nueva, clave, índice
-- Add First -> Añade una columna antes
-- Add After -> Añade una columna después
-- Drop -> Suelta una columna, Índice, clave
-- Change -> Cambia el nombre de una columna
-- Change Type -> Cambia el tipo de columna
-- Modify -> Modifica el tipo de columna
-
-DROP COLUMN es usado para borrar una columna de una tabla.
-
-```sql
-  ALTER TABLE tbl_name DROP col_name;
-```
-
-Para renombrar una tabla se utiliza ALTER TABLE junto con RENAME.
-Renombra la tabla tbl_name a tbl_name_new
-
-```sql
-  ALTER TABLE tbl_name RENAME tbl_name_new;
-```
-
-Añadir una columna usando ALTER TABLE con el modificador ADD COLUMN
-
-```sql
-  ALTER TABLE tbl_name ADD COLUMN field_name_n INT(10);
-```
-
-Podemos añadir FIRST, para añadir la nueva columna al principio de la tabla o AFTER <field_name> para añadirla después de un campo concreto
-
-```sql
-  ALTER TABLE tbl_name ADD COLUMN field_name_n INT(10) FIRST;
-  ALTER TABLE tbl_name ADD COLUMN field_name_n INT(10) AFTER field_name_m;
-```
-
-Para renombrar un campo utilizamos CHANGE, recordando que cuando modificamos una columna, tenemos que especificar de nuevo su tipo de datos.
-
-```sql
-  ALTER TABLE tbl_name CHANGE field_name_n field_name_new VARCHAR(20);
-```
-
-Si indicamos como nuevo nombre el mismo que existía podemos usar esta expresión para cambiar el tipo de datos
-
-```sql
-  ALTER TABLE tbl_name CHANGE field_name_1 field_name_1 VARCHAR(40);
-```
-
-El mismo resultado se puede conseguir utilizando MODIFY
-
-```sql
-  ALTER TABLE tbl_name MODIFY field_name_1 VARCHAR(40);
-```
+En PostgreSQL no existen los modificadores FIRST o AFTER al añadir columnas; las nuevas columnas siempre se añaden al final. Tampoco existen los comandos CHANGE o MODIFY, se usan RENAME COLUMN y ALTER COLUMN TYPE.
 
 ## Lenguaje SQL: control de datos (DCL)
 
@@ -1316,9 +1386,9 @@ JOIN: FROM t1 JOIN t2 ON t1.key = t2.key
 - RIGHT [OUTER] JOIN: devuelve todas las filas de la tabla derecha, incluso cuando no hay coincidencia con la tabla izquierda.
 - FULL JOIN: devuelve las filas en las que hay coincidencia en al menos una de las tablas.
 - SELF JOIN: se utiliza para unir una tabla consigo misma, como si en realidad fueran dos tablas.
-- CARTESIAN JOIN: devuelve el producto cartesiano de un conjunto de registros de dos o mas tablas unidas
+- CARTESIAN JOIN: devuelve el producto cartesiano de un conjunto de registros de dos o más tablas unidas. En PostgreSQL (y en SQL estándar), esto se consigue usando CROSS JOIN o separando las tablas por coma en la cláusula FROM.
 
-```sql
+````sql
   SELECT
     u.id AS user_id,
     u.user_alias,
@@ -1330,32 +1400,32 @@ JOIN: FROM t1 JOIN t2 ON t1.key = t2.key
     u.modified_at
   FROM
     users AS u
-  INNER JOIN
-    user_others AS uo
-  ON
-    u.id = uo.first_user_id
-  WHERE
-    uo.relation_type = 'friend';
-```
+  INSERT INTO
+    - VALUES
 
-La condición de unión se indica con
+  ```sql
+  -- Sintaxis estándar en PostgreSQL para insertar varias filas:
+  INSERT INTO users
+    (user_alias, email, first_name, surname, phone)
+  VALUES
+    ('@pepe', 'pepe@sample.com', 'Pepe', 'Pérez', '123456789'),
+    ('@juan', 'juan@sample.com', 'Juan', 'Gómez', '987654321');
 
-- ON y la condición
-- ON y el nombre único de la columna usada para la condición en ambas tablas
-- USING y el nombre único de la columna usada para la condición en ambas tablas
+  -- No existe la sintaxis SET en PostgreSQL. Para insertar una sola fila:
+  INSERT INTO users
+    (user_alias, email, first_name, surname, phone)
+  VALUES
+    ('@erni', 'erni@sample.com', 'Ernestina', 'Gómez', '987654321');
+````
 
-```sql
-  SELECT
-    u.user_id,
-    u.user_alias,
-    n.title
-  FROM
-    users AS u
-  INNER JOIN
-    notes AS n
-  USING
-    (user_id);
-```
+FROM
+users AS u
+INNER JOIN
+notes AS n
+USING
+(user_id);
+
+````
 
 En MySQL no existe como tal el FULL JOIN pero se consigue con la unión de un LEFT y un RIGHT JOIN
 
@@ -1395,7 +1465,7 @@ En MySQL no existe como tal el FULL JOIN pero se consigue con la unión de un LE
     u.id = uo.first_user_id
   WHERE
     uo.relation_type = 'friend';
-```
+````
 
 #### Unions
 
@@ -1475,7 +1545,8 @@ Se puede usar una union de diferentes consultas a una misma tabla, añadiendo un
 
 - =, <>, !=, >, <, >=, <=
 - BETWEEN .. AND
-- LIKE (case insensitive)
+- LIKE (en PostgreSQL distingue mayúsculas/minúsculas)
+- ILIKE (en PostgreSQL, insensible a mayúsculas/minúsculas)
 - IN
 - IS NULL, IS NOT NULL
 - EXISTS
@@ -1507,7 +1578,6 @@ Se puede usar una union de diferentes consultas a una misma tabla, añadiendo un
 ```
 
 - Expresiones regulares
-
   - REGEXP
   - RLIKE
 
@@ -1540,191 +1610,156 @@ Se puede usar una union de diferentes consultas a una misma tabla, añadiendo un
 
 #### Funciones de agregación
 
-- GROUP BY
 - COUNT(field) devuelve el número de filas que coinciden con la condición
 - SUM(field) devuelve la suma de los valores de un campo
 - AVG(field) devuelve la media de los valores de un campo
 - MIN(field) devuelve el valor mínimo de un campo
 - MAX(field) devuelve el valor máximo de un campo
-- FIRST(field) devuelve el primer valor de un campo
-- LAST(field) devuelve el último valor de un campo
+- FIRST(field) y LAST(field) no existen como funciones agregadas estándar en PostgreSQL. Para obtener el primer o último valor, se suele usar ORDER BY junto con LIMIT 1, o funciones como array_agg y luego acceder al primer/último elemento del array.
+
+Se usan con:
+
+- GROUP BY
 - HAVING(field) se utiliza para filtrar los resultados de una consulta que contiene una cláusula GROUP BY
 
-#### Funciones de cadena
+#### Funciones de cadena (PostgreSQL)
 
-- CHAR_LENGTH(str) devuelve el número de caracteres en str
-- CHARACTER_LENGTH(str) devuelve el número de caracteres en str
-- LENGTH(srt) devuelve el número de bytes en str
-- CONCAT(str1. str2) devuelve la concatenación de str1 y str2
-- CONCAT_WS(str1, str2, str3) devuelve la concatenación de str2, str3, ... con str1 como separador
-- FORMAT(num) devuelve un número formateado con el número de decimales indicado
-- TRIM(str) elimina los espacios en blanco del principio y del final de una cadena
-- LTRIM(str) elimina los espacios en blanco del principio de una cadena
-- RTRIM(str) elimina los espacios en blanco del final de una cadena
-- RPAD(str, n, char) rellena una cadena con caracteres a la derecha
-- LPAD(str, n, char) rellena una cadena con caracteres a la izquierda
-- LOCATE(substr, str) devuelve la posición de la primera aparición de substr en str
-- POSITION(substr IN str) devuelve la posición de la primera aparición de substr en str
-- SUBSTRING(str, pos, len) devuelve una subcadena de str que empieza en la posición pos y tiene una longitud len
-- SUBSTR(str, pos, len) devuelve una subcadena de str que empieza en la posición pos y tiene una longitud len
-- SUBSTRING_INDEX(str, delim, count) devuelve la subcadena de str antes de la count aparición de delim
-- MID(str, pos, len) devuelve una subcadena de str que empieza en la posición pos y tiene una longitud len
-- REPLACE(str, from, to) reemplaza todas las apariciones de from en str por to
-- LOWER(str) devuelve la cadena str en minúsculas
-- LCASE(str) devuelve la cadena str en minúsculas
-- UPPER(str) devuelve la cadena str en mayúsculas
-- UCASE(str) devuelve la cadena str en mayúsculas
-- REVERSE(str) devuelve la cadena str invertida
-- REPEAT(str, n) devuelve la cadena str repetida n veces
-- INSERT(str, pos, len, new_str) inserta new_str en str en la posición pos y con una longitud len
-- SPACE(n) devuelve una cadena de n espacios en blanco
-- STRCMP(str1, str2) devuelve 0 si str1 = str2, 1 si str1 > str2, -1 si str1 < str2
-- INSTR(str, substr) devuelve la posición de la primera aparición de substr en str
-- CHAR(num) devuelve el carácter ASCII correspondiente al número
-- ASCII(str) devuelve el número ASCII correspondiente al carácter str
-- FIELD(str, str1, str2, ...) devuelve la posición de str en la lista de cadenas
-- FIND_IN_SET(str, str_list) devuelve la posición de str en la lista de cadenas
+- CHAR_LENGTH(str) / CHARACTER_LENGTH(str): número de caracteres en str
+- LENGTH(str): número de bytes en str
+- CONCAT(str1, str2, ...): concatenación de cadenas
+- CONCAT_WS(sep, str1, str2, ...): concatenación con separador
+- TRIM(str), LTRIM(str), RTRIM(str): eliminan espacios en blanco
+- RPAD(str, n, char), LPAD(str, n, char): rellenan cadenas
+- POSITION(substr IN str): posición de la primera aparición de substr
+- SUBSTRING(str FROM pos FOR len): subcadena desde pos, longitud len
+- REPLACE(str, from, to): reemplaza todas las apariciones
+- LOWER(str), UPPER(str): minúsculas/mayúsculas
+- REVERSE(str): invierte la cadena
+- REPEAT(str, n): repite la cadena n veces
+- OVERLAY(str PLACING new_str FROM pos [FOR len]): inserta new_str en str
+- SPACE(n): cadena de n espacios
+- STRPOS(str, substr): posición de substr en str
+- ASCII(str): código ASCII del primer carácter
+- CHR(num): carácter correspondiente al código ASCII
 
-#### Funciones numéricas
+Las siguientes funciones no existen en PostgreSQL o tienen alternativas:
 
-- ABS(num) devuelve el valor absoluto de num
-- SIGN(num) devuelve el signo de num
-- CEIL(num) devuelve el entero más pequeño mayor o igual que num
-- CEILING(num) devuelve el entero más pequeño mayor o igual que num
-- FLOOR(num) devuelve el entero más grande menor o igual que num
-- ROUND(num) devuelve el valor redondeado de num
-- ROUND(num, n) devuelve el valor de num redondeado a n decimales
-- TRUNCATE(num, n) devuelve el valor de num truncado a n decimales
-- DIV(num1, num2) devuelve el cociente de la división de num1 por num2
-- MOD(num1, num2) devuelve el resto de la división de num1 por num2
-- POW(num1, num2) devuelve num1 elevado a la potencia de num2
-- POWER(num1, num2) devuelve num1 elevado a la potencia de num2
-- SQRT(num) devuelve la raíz cuadrada de num
-- EXP(num) devuelve el valor de e elevado a la potencia de num
-- LN(num) devuelve el logaritmo natural de num
-- LOG(num, b) devuelve el logaritmo de num en la base b
-- LOG10(num) devuelve el logaritmo en base 10 de num
-- LOG2(num) devuelve el logaritmo en base 2 de num
-- GREATEST(num1, num2, ...) devuelve el mayor de los números de la lista
-- LEAST(num1, num2, ...) devuelve el menor de los números de la lista
-- SIN(num) devuelve el seno de num
-- COS(num) devuelve el coseno de num
-- TAN(num) devuelve la tangente de num
-- COT(num) devuelve la cotangente de num
-- ASIN(num) devuelve el arco seno de num
-- ACOS(num) devuelve el arco coseno de num
-- ATAN(num) devuelve el arco tangente de num
-- ATAN2(num1, num2) devuelve el arco tangente de num1/num2
-- PI() devuelve el valor de PI
-- DEGREES(num) convierte num de radianes a grados
-- RADIANS(num) convierte num de grados a radianes
-- RAND() devuelve un número aleatorio
+- FORMAT(num): usar TO_CHAR(num, formato)
+- LCASE/UCASE: usar LOWER/UPPER
+- SUBSTRING_INDEX, MID, FIELD, FIND_IN_SET, INSTR, STRCMP: no existen directamente, se pueden reemplazar con expresiones o funciones equivalentes.
 
-#### Funciones de fecha y hora
+Por ejemplo, para mostrar un número con separadores de miles y formato local (por ejemplo, 8.400.000,00 en español), se utiliza la función TO_CHAR junto con un formato adecuado:
 
-- NOW() devuelve la fecha y hora actuales
-- CURDATE() devuelve la fecha actual
-- CURRENT_DATE() devuelve la fecha actual
-- CURTIME() devuelve la hora actual
-- CURRENT_TIME() devuelve la hora actual
-- CURRENT_TIMESTAMP() devuelve la fecha y hora actuales
-- DATE_ADD(date, INTERVAL expr unit) añade un intervalo a una fecha
-- DATE_SUB(date, INTERVAL expr unit) resta un intervalo a una fecha
-- DATEDIFF(date1, date2) devuelve el número de días entre dos fechas
-- ADDDATE(date, INTERVAL expr unit) añade un intervalo a una fecha
-- ADDTIME(time, INTERVAL expr unit) añade un intervalo a una hora
-- DATE_FORMAT(date, format) devuelve una fecha formateada
-- DAY(date) devuelve el día de una fecha
-- DAYNAME(date) devuelve el nombre del día de una fecha
-- DAYOFMONTH(date) devuelve el día del mes de una fecha
-- DAYOFWEEK(date) devuelve el día de la semana de una fecha
-- DAYOFYEAR(date) devuelve el día del año de una fecha
-- EXTRACT(unit FROM date) devuelve el valor de una parte de una fecha
-- HOUR(time) devuelve la hora de una hora
-- LAST_DAY(date) devuelve el último día del mes de una fecha
-- LOCALTIME() devuelve la hora local
-- LOCALTIMESTAMP() devuelve la fecha y hora local
-- MICROSECOND(time) devuelve los microsegundos de una hora
-- MINUTE(time) devuelve los minutos de una hora
-- MONTH(date) devuelve el mes de una fecha
-- MONTHNAME(date) devuelve el nombre del mes de una fecha
-- QUARTER(date) devuelve el trimestre de una fecha
-- SECOND(time) devuelve los segundos de una hora
-- SEC_TO_TIME(num) convierte un número de segundos en una hora
-- STR_TO_DATE(str, format) convierte una cadena en una fecha
-- SUBDATE(date, INTERVAL expr unit) resta un intervalo a una fecha
-- SUBTIME(time, INTERVAL expr unit) resta un intervalo a una hora
-- SYSDATE() devuelve la fecha y hora actuales
-- TIME(time) devuelve la hora de una hora
-- TIME_FORMAT(time, format) devuelve una hora formateada
-- TIME_TO_SEC(time) convierte una hora en segundos
-- TIMEDIFF(time1, time2) devuelve la diferencia entre dos horas
-- TIMESTAMP(date) devuelve una fecha y hora
-- TO_DAYS(date) devuelve el número de días desde la fecha 0000-00-00
-- WEEK(date) devuelve el número de la semana de una fecha
-- WEEKDAY(date) devuelve el número del día de la semana de una fecha
-- WEEKOFYEAR(date) devuelve el número de la semana del año de una fecha
-- YEAR(date) devuelve el año de una fecha
-- YEARWEEK(date) devuelve el año y la semana de una fecha
-- PERIOD_ADD(period, n) añade un número de meses a un periodo
-- PERIOD_DIFF(period1, period2) devuelve la diferencia entre dos periodos
-- MAKEDATE(year, day) devuelve una fecha a partir de un año y un número de días
-- MAKETIME(hour, minute, second) devuelve una hora a partir de una hora, minutos y segundos
-- DATE(date) devuelve la fecha de una fecha y hora
-- FROM_DAYS(date) devuelve una fecha a partir de un número de días
+```sql
+SELECT TO_CHAR(8400000.00, '9G999G999D99D99', 'NL') AS formatted_number FROM ...;
+```
+
+El caracter G es el separador de miles y D es el separador decimal. El tercer argumento 'NL' indica que se use el formato local, lo que en español resultará en puntos para los miles y coma para los decimales.
+
+Para asegurar el formato español (punto como separador de miles), puedes establecer la configuración regional de la sesión:
+
+```sql
+SET lc_numeric TO 'es_ES.UTF-8';
+```
+
+#### Funciones numéricas (PostgreSQL)
+
+- ABS(num): valor absoluto
+- SIGN(num): signo
+- CEIL(num) / CEILING(num): entero mayor o igual
+- FLOOR(num): entero menor o igual
+- ROUND(num [, n]): redondeo (opcional decimales)
+- TRUNC(num [, n]): trunca decimales
+- MOD(num1, num2): resto de la división
+- POWER(num1, num2): potencia
+- SQRT(num): raíz cuadrada
+- EXP(num): exponencial
+- LN(num): logaritmo natural
+- LOG(base, num): logaritmo en base específica
+- LOG(num): logaritmo natural
+- GREATEST(num1, num2, ...): mayor de la lista
+- LEAST(num1, num2, ...): menor de la lista
+- SIN, COS, TAN, COT, ASIN, ACOS, ATAN, ATAN2: funciones trigonométricas
+- PI(): valor de PI
+- DEGREES(num), RADIANS(num): conversión grados/radianes
+- RANDOM(): número aleatorio entre 0 y 1
+
+Frente a MySQL no existen como tales
+
+- RAND(), DIV() usar RANDOM() y / o expresiones aritméticas.
+- LOG10(num), LOG2(num): usar LOG(num)/LN(10) o LOG(num)/LN(2)
+
+#### Funciones de fecha y hora (PostgreSQL)
+
+- NOW(), CURRENT_TIMESTAMP, CURRENT_DATE, CURRENT_TIME: fecha y hora actuales
+- EXTRACT(unit FROM date): extrae parte de la fecha/hora
+- AGE(date1, date2): diferencia entre fechas
+- DATE_TRUNC('field', date): trunca la fecha a una precisión
+- TO_CHAR(date, formato): formatea fecha/hora
+- INTERVAL: tipo de dato para intervalos
+- date + INTERVAL 'n unit', date - INTERVAL 'n unit': suma/resta intervalos
+- DATE_PART('field', date): parte de la fecha
+- MAKE_DATE(year, month, day), MAKE_TIME(hour, min, sec): crear fechas/horas
+- JUSTIFY_DAYS, JUSTIFY_HOURS, JUSTIFY_INTERVAL: normalizan intervalos
+- DATE(date), TIME(time): extraen fecha/hora
+- DATE_TRUNC, DATE_PART, EXTRACT, TO_CHAR cubren la mayoría de funciones de MySQL
+
+Frente a MySQL no existen como tales:
+
+- DAYNAME, MONTHNAME: usar TO_CHAR(fecha, 'Day') o ('Month')
+- DATEDIFF: usar AGE o date1 - date2
+- STR_TO_DATE: usar TO_DATE
+- DATE_FORMAT: usar TO_CHAR
+- WEEK, WEEKDAY, WEEKOFYEAR, YEARWEEK, PERIOD_ADD, PERIOD_DIFF, FROM_DAYS: no existen directamente, se pueden construir con expresiones
 
 #### Otras funciones
 
-##### Funciones de control de flujo
+##### Funciones de control de flujo (PostgreSQL)
 
-- IF(condition, value1, value2) devuelve value1 si condition es verdadero, de lo contrario devuelve value2
-- IFNULL(value1, value2) devuelve value1 si no es nulo, de lo contrario devuelve value2
-- NULLIF(value1, value2) devuelve NULL si value1 = value2, de lo contrario devuelve value1
-- CASE WHEN condition1 THEN result1 WHEN condition2 THEN result2 ELSE result3 END devuelve result1 si condition1 es verdadero, result2 si condition2 es verdadero, de lo contrario result3
+- CASE WHEN ... THEN ... ELSE ... END: expresión condicional estándar
+- COALESCE(value1, value2, ...): primer valor no nulo
+- NULLIF(value1, value2): NULL si iguales, si no value1
 
-##### Funciones de conversión
+Frente a MySQL:
 
-- CAST(expr AS type) convierte expr en el tipo de datos type
-- CONV(num, from_base, to_base) convierte num de una base numérica a otra
-- CONVERT(expr, type) convierte expr en el tipo de datos type
-- BIN(expr) convierte expr en una cadena binaria
-- BINARY expr convierte expr en una cadena binaria
-- DECIMAL(expr) convierte expr en un número decimal
-- SIGNED(expr) convierte expr en un número con signo
-- UNSIGNED(expr) convierte expr en un número sin signo
-- HEX(expr) convierte expr en una cadena hexadecimal
-- UNHEX(expr) convierte expr en una cadena binaria
-- OCT(expr) convierte expr en una cadena octal
-- BIN_TO_UUID(expr) convierte expr en un UUID
-- UUID_TO_BIN(expr) convierte expr en un binario
-- COALESCE(value1, value2, ...) devuelve el primer valor no nulo de la lista
-- ISNULL(expr) devuelve 1 si expr es nulo, de lo contrario devuelve 0
+- IF y IFNULL no existen, usar CASE y COALESCE
 
-##### Funciones de sistema
+##### Funciones de conversión (PostgreSQL)
 
-- BENCHMARK(num, expr) ejecuta expr num veces
-- CONNECTION_ID() devuelve el ID de la conexión actual
-- DATABASE() devuelve el nombre de la base de datos actual
-- LAST_INSERT_ID() devuelve el último valor AUTO_INCREMENT insertado
-- ROW_COUNT() devuelve el número de filas afectadas por la última sentencia
-- SCHEMA() devuelve el nombre de la base de datos actual
-- SESSION_USER() devuelve el nombre de usuario y el host de la conexión actual
-- SYSTEM_USER() devuelve el nombre de usuario y el host de la conexión actual
-- USER() devuelve el nombre de usuario y el host de la conexión actual
-- CURRENT_USER() devuelve el nombre de usuario y el host de la conexión actual
-- VERSION() devuelve la versión actual de MySQL
+- CAST(expr AS type), expr::type: conversión de tipos
+- TO_NUMBER, TO_CHAR, TO_DATE, TO_TIMESTAMP: conversión y formateo
+- ENCODE/DECODE: codificación binaria/base64/hex
+- HEX(expr): usar ENCODE(expr, 'hex')
+- COALESCE(value1, value2, ...): primer valor no nulo
+- NULLIF(value1, value2): NULL si iguales
 
-##### Funciones de cifrado
+Frente a MySQL:
 
-- AES_DECRYPT(crypt_str, key_str) descifra una cadena cifrada con AES
-- AES_ENCRYPT(str, key_str) cifra una cadena con AES
-- COMPRESS(str) comprime una cadena
-- MD5(str) devuelve el valor MD5 de una cadena
-- SHA1(str) devuelve el valor SHA1 de una cadena
-- SHA(str) devuelve el valor SHA de una cadena
-  -SHA2(str, hash_length) devuelve el valor SHA2 de una cadena
-- UNCOMPRESS(str) descomprime una cadena
-- UNCOMPRESSED_LENGTH(str) devuelve la longitud de una cadena descomprimida
+- CONV, BIN, BINARY, SIGNED, UNSIGNED, UNHEX, OCT, BIN_TO_UUID, UUID_TO_BIN, ISNULL: no existen directamente
+
+##### Funciones de sistema (PostgreSQL)
+
+- CURRENT_DATABASE(): nombre de la base de datos actual
+- CURRENT_USER, SESSION_USER, USER: usuario actual
+- VERSION(): versión de PostgreSQL
+- ROW_COUNT(): usar GET DIAGNOSTICS o funciones de control
+
+Frente a MySQL:
+
+- BENCHMARK, CONNECTION_ID, LAST_INSERT_ID, SCHEMA: no existen directamente
+
+##### Funciones de cifrado (PostgreSQL)
+
+- MD5(str): hash MD5
+- SHA1(str), SHA224, SHA256, SHA384, SHA512: funciones hash (requieren extensión pgcrypto)
+- ENCRYPT, DECRYPT: cifrado simétrico (requiere extensión pgcrypto)
+- PGP_SYM_ENCRYPT, PGP_SYM_DECRYPT: cifrado simétrico tipo PGP
+- PGP_PUB_ENCRYPT, PGP_PUB_DECRYPT: cifrado asimétrico tipo PGP
+- ENCODE/DECODE: codificación base64, hex, etc.
+
+Frente a MySQL:
+
+- AES_ENCRYPT/AES_DECRYPT, COMPRESS/UNCOMPRESS, UNCOMPRESSED_LENGTH: no existen directamente, usar funciones de pgcrypto o extensiones
 
 ### INSERT (Create)
 
@@ -1738,14 +1773,6 @@ INSERT INTO users
   VALUES
   ('@pepe', 'pepe@sample.com', 'Pepe', 'Pérez', '123456789')
   ('@juan', 'juan@sample.com', 'Juan', 'Gómez', '987654321');
-
-INSERT INTO users
-  SET
-  user_alias = '@erni',
-  email = 'erni@sample .com',
-  first_name = 'Ernestina',
-  surname = 'Gómez',
-  phone = '987654321';
 ```
 
 ### UPDATE (Update)
@@ -1756,6 +1783,7 @@ INSERT INTO users
 
 ```sql
 UPDATE users
+
   SET
     user_alias = '@jose',
     first_name = 'Jose'
@@ -1766,7 +1794,6 @@ UPDATE users
 ### DELETE (Delete)
 
 - DELETE FROM
-
   - WHERE
 
 ```sql
@@ -1795,50 +1822,45 @@ Sin embargo, no se puede usar si hay claves foráneas
 
 ### Subqueries
 
-Una subquery es una sentencia SELECT que forma parte de otra sentencia SQL, habitualmente en un WHERE
+Una subconsulta (subquery) es una sentencia SELECT que se utiliza como parte de otra sentencia SQL, normalmente dentro de un WHERE, pero también en SELECT, FROM, INSERT, UPDATE o DELETE.
 
-Se pueden incluir en SELECT, INSERT, UPDATE, DELETE, SET
-y DO.
+En PostgreSQL, las subconsultas funcionan igual que en el estándar SQL y siempre se indican entre paréntesis.
 
-Siempre se indican entre paréntesis
-
-```sql
-  SELECT
-    u.id AS user_id,
-    u.user_alias,
-    u.email,
-    u.first_name,
-    u.surname,
-    u.phone,
-    u.created_at,
-    u.modified_at
-  FROM
-    users AS u
-  WHERE
-    u.id IN (SELECT id FROM user_others WHERE relation_type = 'friend');
-```
+Ejemplo en una cláusula WHERE:
 
 ```sql
-  SELECT
-    u.id AS user_id,
-    u.user_alias,
-    u.email,
-    u.first_name,
-    u.surname,
-    u.phone,
-    u.created_at,
-    u.modified_at
-  FROM
-    users AS u
-  WHERE
-    u.id IN (SELECT id FROM user_others WHERE relation_type = 'friend');
+SELECT
+  u.id AS user_id,
+  u.user_alias,
+  u.email,
+  u.first_name,
+  u.surname,
+  u.phone,
+  u.created_at,
+  u.modified_at
+FROM
+  users AS u
+WHERE
+  u.id IN (
+    SELECT user_id FROM user_others WHERE relation_type = 'friend'
+  );
 ```
 
-Papel de las subqueries
+También se pueden usar subconsultas en la lista de selección o en la cláusula FROM:
 
-- Eliminar JOINS innecesarios
-- Incorporar el resultado de funciones a las condiciones de una sentencia SQL
-- Usado en aplicaciones, eliminar múltiples queries en los bucles
+```sql
+SELECT
+  u.user_alias,
+  (SELECT COUNT(*) FROM notes n WHERE n.author_id = u.user_id) AS notas
+FROM users u;
+```
+
+Papel de las subconsultas:
+
+- Permiten evitar algunos JOINs innecesarios.
+- Permiten usar resultados de funciones o cálculos en condiciones.
+- Facilitan consultas complejas y reutilización de lógica.
+- Se usan mucho en aplicaciones para evitar múltiples queries en bucles.
 
 ### Índices
 
@@ -1850,39 +1872,51 @@ Un índice es una estructura de datos que mejora la velocidad de las operaciones
 
 Para la PK y la FK se crean índices automáticamente
 
+Ejemplo
+
+```sql
+CREATE INDEX idx_texto ON tabla (campos)
+```
+
 Desventajas
 
 - Ocupan espacio en disco
 - Ralentizan las operaciones de escritura
 - Manteniendo más complejo al tener en cuenta de los índices
 
-#### Índices FULLTEXT
+#### Búsqueda de texto completo (Full-text search) en PostgreSQL
 
-Los índices `FULLTEXT` se utilizan para realizar búsquedas de texto completo en columnas de tipo `CHAR`, `VARCHAR`, `TEXT` y similares.
+En PostgreSQL, la búsqueda de texto completo se realiza usando los tipos y funciones `tsvector`, `tsquery`, y los índices GIN o GiST.
 
-```sql
-  CREATE FULLTEXT INDEX index_name
-  ON table_name (column1, column2, ...);
-```
-
-Para aprovechar estos indices, se utilizan las funciones `MATCH` y `AGAINST` en las clausulas `WHERE`
+Para crear un índice de texto completo:
 
 ```sql
-  SELECT
-    u.id AS user_id,
-    u.user_alias,
-    u.email,
-    u.first_name,
-    u.surname,
-    u.phone,
-    u.created_at,
-    u.modified_at
-  FROM
-    users AS u
-  WHERE
-    MATCH (u.first_name, u.surname)
-    AGAINST ('Pepe' IN NATURAL LANGUAGE MODE);
+CREATE INDEX idx_texto ON tabla USING GIN (to_tsvector('spanish', columna_texto));
 ```
+
+Para buscar texto:
+
+```sql
+SELECT * FROM tabla
+WHERE to_tsvector('spanish', columna_texto) @@ plainto_tsquery('spanish', 'Pepe');
+```
+
+- `to_tsvector` convierte el texto en un vector de términos.
+- `plainto_tsquery` convierte la consulta en una expresión de búsqueda.
+- El operador `@@` evalúa si hay coincidencia.
+
+Puedes combinar varias columnas:
+
+```sql
+CREATE INDEX idx_fulltext ON users USING GIN (
+  to_tsvector('spanish', first_name || ' ' || surname)
+);
+
+SELECT * FROM users
+WHERE to_tsvector('spanish', first_name || ' ' || surname) @@ plainto_tsquery('spanish', 'Pepe');
+```
+
+Consulta la documentación oficial de PostgreSQL para más opciones avanzadas de búsqueda de texto completo.
 
 ### Views
 
@@ -1963,17 +1997,14 @@ Para abordar estos problemas, los DBMS utilizan diferentes tipos de bloqueos. A 
 Los bloqueos pueden aplicarse a diferentes niveles de granularidad:
 
 1. **Bloqueo de Fila (Row-Level Locking)**: Aplica el bloqueo a nivel de fila individual.
-
    - **Ventajas**: Permite un alto nivel de concurrencia, ya que solo las filas afectadas están bloqueadas.
    - **Desventajas**: Puede requerir más recursos del sistema para gestionar los bloqueos.
 
 2. **Bloqueo de Página (Page-Level Locking)**: Aplica el bloqueo a nivel de página de datos, que puede contener múltiples filas.
-
    - **Ventajas**: Menos recursos del sistema en comparación con el bloqueo de fila.
    - **Desventajas**: Menor concurrencia, ya que más datos están bloqueados.
 
 3. **Bloqueo de Tabla (Table-Level Locking)**: Aplica el bloqueo a nivel de tabla completa.
-
    - **Ventajas**: Fácil de implementar y gestionar.
    - **Desventajas**: Baja concurrencia, ya que toda la tabla está bloqueada.
 
@@ -1985,54 +2016,55 @@ Los bloqueos pueden aplicarse a diferentes niveles de granularidad:
 
 En resumen, los bloqueos son fundamentales para garantizar la integridad y consistencia de los datos en entornos concurrentes. Aunque no todos los motores de bases de datos soportan todos los tipos de bloqueos, la mayoría ofrece mecanismos para gestionar el acceso concurrente de manera eficiente.
 
-#### Transactions en MySQL
+#### Transacciones en PostgreSQL
 
-Las transacciones en MySQL son una secuencia de operaciones realizadas como una sola unidad lógica de trabajo. Una transacción puede incluir una o más **consultas SQL** que modifican los datos en la base de datos. Las transacciones son fundamentales para garantizar la integridad y consistencia de los datos, especialmente en entornos concurrentes donde múltiples usuarios o procesos acceden a la base de datos simultáneamente. Al seguir las propiedades ACID y utilizar los comandos adecuados para gestionar transacciones, se puede asegurar que las operaciones críticas se realicen de manera segura y eficiente.
+Las transacciones en PostgreSQL funcionan como una unidad lógica de trabajo que agrupa una o más **consultas SQL** que modifican los datos. Son esenciales para garantizar la integridad y consistencia de los datos, especialmente en entornos concurrentes. PostgreSQL implementa completamente el modelo ACID y ofrece un control avanzado sobre las transacciones y sus niveles de aislamiento.
 
-AL definir las transacciones nos hemos referido a las consultas, es decir a las operaciones incluidas en el DML (Data Manipulation Language) de SQL. Las transacciones no se aplican a las operaciones de DDL (Data Definition Language) como `CREATE`, `ALTER` o `DROP`, ya que estas operaciones no afectan a los datos en sí, sino a la estructura de la base de datos e incluyen un `COMMIT` automático cuando se ejecutan.
+Las transacciones afectan principalmente a las operaciones DML (Data Manipulation Language), como `INSERT`, `UPDATE` y `DELETE`. Las operaciones DDL (`CREATE`, `ALTER`, `DROP`) en PostgreSQL también pueden formar parte de una transacción, a diferencia de otros sistemas como MySQL, donde suelen hacer un `COMMIT` automático. Esto permite deshacer cambios estructurales si es necesario, siempre que no se haya confirmado la transacción.
 
 ##### Propiedades ACID de las Transacciones
 
-Las transacciones en MySQL siguen las propiedades ACID, que son:
+Las transacciones en PostgreSQL cumplen las propiedades ACID:
 
-1. **Atomicidad**: Asegura que todas las operaciones dentro de una transacción se completen con éxito. Si alguna operación falla, toda la transacción se deshace, y la base de datos vuelve a su estado anterior.
-2. **Consistencia**: Garantiza que una transacción lleva a la base de datos de un estado válido a otro estado válido, manteniendo todas las reglas y restricciones definidas.
-3. **Aislamiento**: Asegura que las operaciones dentro de una transacción no interfieran con otras transacciones concurrentes. Esto se logra mediante diferentes niveles de aislamiento.
-4. **Durabilidad**: Una vez que una transacción se ha confirmado (committed), los cambios son permanentes y no se perderán, incluso en caso de fallos del sistema.
+1. **Atomicidad**: Todas las operaciones dentro de una transacción se completan con éxito o, si alguna falla, se deshacen todas, dejando la base de datos en el estado anterior.
+2. **Consistencia**: Una transacción lleva la base de datos de un estado válido a otro, respetando todas las reglas y restricciones.
+3. **Aislamiento**: Las operaciones de una transacción no interfieren con otras concurrentes, gracias a los niveles de aislamiento configurables.
+4. **Durabilidad**: Una vez confirmada (commit), los cambios son permanentes, incluso ante fallos del sistema.
 
-##### Gestión de Transacciones en MySQL
+##### Gestión de Transacciones en PostgreSQL
 
-MySQL soporta transacciones a través de los motores de almacenamiento InnoDB y NDB. Aquí se describen los comandos básicos para gestionar transacciones:
+PostgreSQL soporta transacciones de forma nativa y completa. Los comandos básicos para gestionar transacciones son:
 
 1. **Iniciar una Transacción**:
 
-   - `BEGIN;`: Inicia una nueva transacción.
-   - `START TRANSACTION;` es la versión antiguamente utilizada, exclusiva de MySQL.
+   - `BEGIN;` o `START TRANSACTION;` (ambos válidos en PostgreSQL)
 
    ```sql
    BEGIN;
+   -- o
+   START TRANSACTION;
    ```
 
-1. **Confirmar una Transacción**:
+2. **Confirmar una Transacción**:
 
-   - `COMMIT;`: Confirma la transacción, haciendo permanentes todos los cambios realizados durante la transacción.
+   - `COMMIT;` confirma la transacción y hace permanentes todos los cambios.
 
    ```sql
    COMMIT;
    ```
 
-1. **Deshacer una Transacción**:
+3. **Deshacer una Transacción**:
 
-   - `ROLLBACK;`: Deshace todos los cambios realizados durante la transacción, devolviendo la base de datos a su estado anterior.
+   - `ROLLBACK;` deshace todos los cambios realizados durante la transacción.
 
    ```sql
    ROLLBACK;
    ```
 
-1. **Puntos de Salvaguarda**:
+4. **Puntos de Salvaguarda**:
 
-   - `SAVEPOINT nombre_save_point;`: Establece un punto de salvaguarda dentro de una transacción.
-   - `ROLLBACK TO nombre_save_point;`: Deshace los cambios realizados desde el punto de salvaguarda especificado.
+   - `SAVEPOINT nombre_save_point;` crea un punto de restauración dentro de la transacción.
+   - `ROLLBACK TO nombre_save_point;` revierte los cambios realizados desde ese punto.
 
    ```sql
    SAVEPOINT punto1;
@@ -2042,22 +2074,28 @@ MySQL soporta transacciones a través de los motores de almacenamiento InnoDB y 
 
 ##### Niveles de Aislamiento
 
-MySQL ofrece diferentes niveles de aislamiento para controlar cómo las transacciones interactúan entre sí:
+PostgreSQL permite configurar el nivel de aislamiento de las transacciones para controlar la visibilidad de los datos entre transacciones concurrentes. Los niveles disponibles son:
 
-1. **READ UNCOMMITTED**: Permite leer datos no confirmados de otras transacciones. Puede causar lecturas sucias.
-2. **READ COMMITTED**: Solo permite leer datos que han sido confirmados. Evita lecturas sucias pero no lecturas no repetibles.
-3. **REPEATABLE READ**: Asegura que si se lee el mismo dato dos veces dentro de la misma transacción, se obtendrá el mismo valor. Evita lecturas no repetibles pero no lecturas fantasma.
-4. **SERIALIZABLE**: El nivel más estricto, asegura que las transacciones se ejecuten de manera secuencial. Evita todos los problemas de concurrencia pero puede reducir el rendimiento.
+1. **READ UNCOMMITTED**: Permite leer datos no confirmados (no recomendado, se comporta igual que READ COMMITTED en PostgreSQL).
+2. **READ COMMITTED**: Solo permite leer datos confirmados. Es el valor por defecto.
+3. **REPEATABLE READ**: Garantiza que todas las lecturas dentro de la transacción ven un snapshot consistente.
+4. **SERIALIZABLE**: El nivel más estricto, simula la ejecución secuencial de las transacciones.
 
-Para establecer el nivel de aislamiento, se utiliza el comando:
+Para establecer el nivel de aislamiento:
 
 ```sql
 SET TRANSACTION ISOLATION LEVEL nombre_nivel;
 ```
 
+Ejemplo:
+
+```sql
+SET TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+```
+
 ##### Ejemplo de Transacción
 
-Aquí tienes un ejemplo simple de una transacción en MySQL:
+Ejemplo típico de transferencia entre cuentas en PostgreSQL:
 
 ```sql
 BEGIN;
@@ -2068,56 +2106,45 @@ UPDATE cuenta SET saldo = saldo - 100 WHERE id_cuenta = 1;
 -- Operación 2
 UPDATE cuenta SET saldo = saldo + 100 WHERE id_cuenta = 2;
 
--- Si todo está bien, confirmamos la transacción
+-- Si todo está bien
 COMMIT;
 
--- Si algo falla, deshacemos la transacción
+-- Si algo falla
 -- ROLLBACK;
 ```
 
-En este ejemplo, se transfiere dinero de una cuenta a otra. Si ambas operaciones se completan con éxito, se confirma la transacción con `COMMIT`. Si algo falla, se puede deshacer la transacción con `ROLLBACK`. Este código cobrará más sentido si podemos incluir cierto código que evalúe el resultado de las operaciones y decida si se confirma o se deshace la transacción. Ahí es donde entra en juego el código de programación que se conecta a la base de datos, como aplicaciones externas o el propio código de la base de datos del que hablaremos a continuación.
+En este ejemplo, si ambas operaciones se ejecutan correctamente, se confirma la transacción con `COMMIT`. Si ocurre algún error, se puede deshacer todo con `ROLLBACK`. En aplicaciones reales, la lógica de control de errores suele estar en el código de la aplicación que interactúa con la base de datos.
 
-### Procedimientos almacenados (Stored Procedures) y funciones (Functions) en MySQL
+### Procedimientos almacenados (Stored Procedures) y funciones (Functions) en PostgreSQL
 
-Los procedimientos almacenados y las funciones son bloques de código SQL que se almacenan en la base de datos y se pueden ejecutar de manera repetitiva. Ambos son herramientas poderosas en MySQL que permiten encapsular lógica compleja, mejorar la modularidad y reutilización del código y optimizar el rendimiento.
+En PostgreSQL, los procedimientos almacenados y las funciones permiten encapsular lógica compleja y reutilizable dentro de la base de datos. Aunque el concepto es similar al de MySQL, la sintaxis y algunas capacidades difieren.
 
-#### Procedimientos Almacenados
+#### Procedimientos almacenados (Procedures)
 
-Un procedimiento almacenado es un conjunto de instrucciones SQL que se ejecutan como una unidad. Los procedimientos almacenados pueden aceptar parámetros de entrada y salida, y pueden realizar operaciones complejas en la base de datos.
+Desde PostgreSQL 11 existen los procedimientos almacenados como tal (`CREATE PROCEDURE`). Antes, solo existían funciones (`CREATE FUNCTION`). Los procedimientos se ejecutan con `CALL` y pueden realizar transacciones internas (COMMIT/ROLLBACK dentro del procedimiento).
 
-##### Características de los Procedimientos Almacenados
-
-- **Reutilización**: Permiten reutilizar código SQL en múltiples partes de una aplicación.
-- **Rendimiento**: Al estar precompilados, pueden ejecutarse más rápidamente que las consultas SQL dinámicas.
-- **Seguridad**: Pueden restringir el acceso directo a las tablas, permitiendo solo la ejecución de procedimientos específicos.
-- **Mantenimiento**: Facilitan el mantenimiento del código al centralizar la lógica en un solo lugar.
-
-##### Sintaxis Básica
+**Sintaxis básica:**
 
 ```sql
-DELIMITER //
-
-CREATE PROCEDURE nombre_procedimiento ([parámetros])
+CREATE PROCEDURE nombre_procedimiento([parámetros])
+LANGUAGE plpgsql
+AS $$
 BEGIN
-    -- Cuerpo del procedimiento
-END //
-
-DELIMITER ;
+  -- Cuerpo del procedimiento
+END;
+$$;
 ```
 
-##### Ejemplo de Procedimiento Almacenado
+**Ejemplo:**
 
 ```sql
-DELIMITER //
-
-CREATE PROCEDURE actualizar_salario (IN empleado_id INT, IN nuevo_salario DECIMAL(10, 2))
+CREATE PROCEDURE actualizar_salario(empleado_id INT, nuevo_salario NUMERIC)
+LANGUAGE plpgsql
+AS $$
 BEGIN
-    UPDATE empleados
-    SET salario = nuevo_salario
-    WHERE id = empleado_id;
-END //
-
-DELIMITER ;
+  UPDATE empleados SET salario = nuevo_salario WHERE id = empleado_id;
+END;
+$$;
 ```
 
 Para ejecutar el procedimiento:
@@ -2126,46 +2153,35 @@ Para ejecutar el procedimiento:
 CALL actualizar_salario(1, 50000.00);
 ```
 
-#### Funciones
+#### Funciones (Functions)
 
-Una función es similar a un procedimiento almacenado, pero siempre devuelve un valor. Las funciones se utilizan principalmente para realizar cálculos o transformaciones de datos y se pueden llamar desde consultas SQL.
+Las funciones en PostgreSQL pueden devolver un valor escalar, un registro o un conjunto de registros. Se pueden usar en consultas SQL y pueden aceptar parámetros de entrada y salida.
 
-##### Características de las Funciones
-
-- **Devolución de Valor**: Siempre devuelven un valor, que puede ser utilizado en consultas SQL.
-- **Reutilización**: Permiten reutilizar lógica de cálculo o transformación en múltiples consultas.
-- **Modularidad**: Facilitan la modularización del código al separar la lógica de cálculo en funciones específicas.
-
-##### Sintaxis Básica de las funciones
+**Sintaxis básica:**
 
 ```sql
-DELIMITER //
-
-CREATE FUNCTION nombre_función ([parámetros])
+CREATE FUNCTION nombre_funcion([parámetros])
 RETURNS tipo_retorno
+LANGUAGE plpgsql
+AS $$
 BEGIN
-    -- Cuerpo de la función
-    RETURN valor;
-END //
-
-DELIMITER ;
+  -- Cuerpo de la función
+  RETURN valor;
+END;
+$$;
 ```
 
-##### Ejemplo de Función
+**Ejemplo:**
 
 ```sql
-DELIMITER //
-
-CREATE FUNCTION calcular_impuesto (precio DECIMAL(10, 2))
-RETURNS DECIMAL(10, 2)
-DETERMINISTIC
+CREATE FUNCTION calcular_impuesto(precio NUMERIC)
+RETURNS NUMERIC
+LANGUAGE plpgsql
+AS $$
 BEGIN
-    DECLARE impuesto DECIMAL(10, 2);
-    SET impuesto = precio * 0.21;
-    RETURN impuesto;
-END //
-
-DELIMITER ;
+  RETURN precio * 0.21;
+END;
+$$;
 ```
 
 Para utilizar la función en una consulta:
@@ -2175,84 +2191,106 @@ SELECT producto_id, precio, calcular_impuesto(precio) AS impuesto
 FROM productos;
 ```
 
-#### Diferencias entre Procedimientos Almacenados y Funciones
+#### Diferencias clave respecto a MySQL
 
-- **Devolución de Valor**: Las funciones siempre devuelven un valor, mientras que los procedimientos almacenados no necesariamente lo hacen.
-- **Uso en Consultas**: Las funciones se pueden utilizar directamente en consultas SQL, mientras que los procedimientos almacenados no.
-- **Parámetros de Salida**: Los procedimientos almacenados pueden tener parámetros de salida (OUT), mientras que las funciones no.
+- En PostgreSQL, las funciones pueden devolver múltiples tipos de datos, incluso tablas completas (`RETURNS TABLE(...)`).
+- Los procedimientos (`CREATE PROCEDURE`) no devuelven valores, pero pueden gestionar transacciones internas.
+- Las funciones pueden usarse en SELECT, WHERE, etc.; los procedimientos solo se ejecutan con `CALL`.
+- No es necesario cambiar el delimitador (`DELIMITER`) como en MySQL.
 
-#### Ventajas y Desventajas
+#### Ventajas y desventajas
 
-##### Ventajas
+**Ventajas:**
 
-- **Modularidad**: Permiten dividir el código en módulos reutilizables.
-- **Rendimiento**: Al estar precompilados, pueden ejecutarse más rápidamente.
-- **Seguridad**: Pueden restringir el acceso directo a las tablas.
+- Modularidad y reutilización de lógica.
+- Posibilidad de crear funciones en otros lenguajes (Python, SQL, C, etc.).
+- Control de transacciones en procedimientos.
 
-##### Desventajas
+**Desventajas:**
 
-- **Complejidad**: Pueden aumentar la complejidad del código si no se gestionan adecuadamente.
-- **Depuración**: Puede ser más difícil depurar procedimientos almacenados y funciones en comparación con el código SQL dinámico.
+- La depuración puede ser compleja.
+- El rendimiento depende de la complejidad y uso adecuado.
 
-### Triggers
+### Triggers (Disparadores) en PostgreSQL
 
-Los triggers (disparadores) son bloques de código SQL que se ejecutan automáticamente en respuesta a ciertos eventos en la base de datos. Los triggers son una característica poderosa de MySQL que permite automatizar tareas, mantener la integridad de los datos y aplicar reglas de negocio de manera eficiente.
+Los triggers (disparadores) en PostgreSQL son bloques de código que se ejecutan automáticamente en respuesta a eventos como `INSERT`, `UPDATE` o `DELETE` sobre una tabla. Permiten automatizar tareas, mantener la integridad de los datos y aplicar reglas de negocio.
 
-Un ejemplo habitual es asignar un valor a un atributo calculado en función de otros atributos de la tabla.
+En PostgreSQL, los triggers siempre llaman a una función (trigger function) escrita normalmente en PL/pgSQL.
 
-Por ejemplo, para una tabla de empleados, se puede tener un trigger que actualice el salario de un empleado cuando se modifica su nivel de experiencia.
+#### Sintaxis básica
+
+1. Crear la función del trigger:
+
+    ```sql
+    CREATE OR REPLACE FUNCTION actualizar_salario()
+    RETURNS TRIGGER AS $$
+    BEGIN
+      IF NEW.experiencia > 5 THEN
+        NEW.salario := NEW.salario * 1.1;
+      END IF;
+      RETURN NEW;
+    END;
+    $$ LANGUAGE plpgsql;
+    ```
+
+2. Crear el trigger asociado a la tabla:
+
+  ```sql
+  CREATE TRIGGER trg_actualizar_salario
+  BEFORE UPDATE ON empleados
+  FOR EACH ROW
+  EXECUTE FUNCTION actualizar_salario();
+  ```
+
+**Uso:**
 
 ```sql
-
-DELIMITER //
-
-CREATE TRIGGER actualizar_salario
-AFTER UPDATE ON empleados
-FOR EACH ROW
-BEGIN
-    IF NEW.experiencia > 5 THEN
-        SET NEW.salario = NEW.salario * 1.1;
-    END IF;
-END //
-
-DELIMITER ;
-
--- USO DEL TRIGGER
-
-UPDATE empleados
-SET experiencia = 6
-WHERE id = 1;
+UPDATE empleados SET experiencia = 6 WHERE id = 1;
 ```
 
-En este otro ejemplo, se actualiza el número de likes de un tweet cada vez que se inserta un nuevo like en la tabla `tweet_likes`.
+#### Ejemplo: actualizar número de likes
+
+1. Función para incrementar likes:
+
+    ```sql
+    CREATE OR REPLACE FUNCTION incrementar_likes()
+    RETURNS TRIGGER AS $$
+    BEGIN
+      UPDATE tweets SET num_likes = num_likes + 1 WHERE tweet_id = NEW.tweet_id;
+      RETURN NEW;
+    END;
+    $$ LANGUAGE plpgsql;
+    ```
+
+2. Trigger:
+
+    ```sql
+    CREATE TRIGGER trg_incrementar_likes
+    AFTER INSERT ON tweet_likes
+    FOR EACH ROW
+    EXECUTE FUNCTION incrementar_likes();
+    ```
+
+Para decrementar:
 
 ```sql
-DELIMITER $$
-
-CREATE TRIGGER update_num_likes
-AFTER INSERT ON tweet_likes
-FOR EACH ROW
+CREATE OR REPLACE FUNCTION decrementar_likes()
+RETURNS TRIGGER AS $$
 BEGIN
-  UPDATE tweets
-  SET num_likes = num_likes + 1
-  WHERE tweet_id = NEW.tweet_id;
-END $$
+  UPDATE tweets SET num_likes = num_likes - 1 WHERE tweet_id = OLD.tweet_id;
+  RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
 
-DELIMITER ;
-```
-
-Igualmente habría que crear un trigger para decrementar el número de likes cuando se elimina un like.
-
-```sql
-DELIMITER $$
-CREATE TRIGGER decrease_num_likes
+CREATE TRIGGER trg_decrementar_likes
 AFTER DELETE ON tweet_likes
 FOR EACH ROW
-BEGIN
-  UPDATE tweets
-  SET num_likes = num_likes - 1
-  WHERE tweet_id = OLD.tweet_id;
-END $$
-
-DELIMITER ;
+EXECUTE FUNCTION decrementar_likes();
 ```
+
+#### Diferencias clave en los triggers respecto a MySQL
+
+- En PostgreSQL, el trigger ejecuta siempre una función.
+- No se usa `DELIMITER`.
+- Se puede elegir BEFORE o AFTER, y trabajar con NEW y OLD.
+- El trigger puede devolver NEW (para INSERT/UPDATE) u OLD (para DELETE).
