@@ -1,4 +1,4 @@
-import type { Genre } from "./genres.ts";
+import type { Genre } from './genres.ts';
 
 export interface Movie {
   id: number;
@@ -9,4 +9,9 @@ export interface Movie {
   poster: string; // url movie poster
   rate: number; // moving rating 0 a 10
   genres?: Genre[]; // Array of genres associated with the movies
+}
+
+export interface RelationMovieGenre {
+  movie_id: number;
+  genre_id: number;
 }
